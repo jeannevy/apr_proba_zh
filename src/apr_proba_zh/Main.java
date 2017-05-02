@@ -19,8 +19,17 @@ public class Main {
 		for (int i = 0; i<8; i++) {
 			for (int j = 0; j<8; j++) {
 				Cell actcell = new Cell((double) i, (double) j);
-				actcell.calculateDistance(b1);
+				String nearBasisName = basises.chooseSmallest(actcell);
+				for (Cell bas: basises.cellList) {
+					BasisStation basisst = (BasisStation) bas;
+					if (basisst.name.equals(nearBasisName)) {
+						actcell.basis = basisst;
+						break;
+					}
+				}
 				matrix.cellList.add(actcell);
+				System.out.println(actcell.getRow() + ", " + actcell.getCol() + ", " + actcell.basis.name);
+
 				
 			}
 		}

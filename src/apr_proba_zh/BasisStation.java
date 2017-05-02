@@ -8,6 +8,8 @@ public class BasisStation extends Cell{
 		this.name = name;
 	}
 	
+
+	
 		
 
 }

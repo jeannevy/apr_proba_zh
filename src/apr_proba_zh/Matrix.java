@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Set;
 
 public class Matrix {
@@ -29,10 +30,29 @@ public class Matrix {
 	        public int compare(Entry<String, Double> entry1, Entry<String, Double> entry2) {
 	        	double distance1 = entry1.getValue();
 	        	double distance2 = entry2.getValue();
-	            return (int) (distance2 - distance1);
+	            return (int) (distance1 - distance2);
 	        }
 	    });
 		
-		
+		Double d = (Double)resultList.get(0).getValue();
+		int index = 0;
+		ArrayList<Entry<String, Double>> smallest = new ArrayList<Entry<String, Double>>();
+		while (d.equals(resultList.get(index).getValue())) {
+			smallest.add(resultList.get(index));
+			System.out.println(resultList.get(index).getKey() + ", " + resultList.get(index).getValue());
+
+			index += 1;
+		}
+		if (smallest.size() > 1) {
+			Random rand = new Random();
+			int ind = rand.nextInt(smallest.size());
+			Entry<String, Double> choosedItem = smallest.get(ind);
+			return choosedItem.getKey();
+		}
+		else {
+			return smallest.get(0).getKey();
+		}
 	}
+	
+	
 }
