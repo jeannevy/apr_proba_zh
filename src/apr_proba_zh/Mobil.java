@@ -1,8 +1,10 @@
 package apr_proba_zh;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Random;
 
-public class Mobil extends Cell implements Runnable {
+public class Mobil extends Cell implements Runnable, Observer {
 	int id;
 	
 	public Mobil(double r, double c, int id) {
@@ -15,8 +17,19 @@ public class Mobil extends Cell implements Runnable {
 		return result;
 	}
 	
+	public void update(Observable o, Object message) {
+		if (o instanceof BasisStation.NameRadio && message instanceof String) {
+			BasisStation.NameRadio radio = (BasisStation.NameRadio)o;
+			BasisStation station = radio.owner;
+			String nameMessage = (String)message;
+			System.out.println("mobil id: " + this.id + " new basisstation name: " + nameMessage + " (is got from, basis position): " + station.getRow() + ", " + station.getCol()); 
+		}
+		}
+	
 	public void run() {
+		
 		while (true) {
+			this.basis.nameRadio.deleteObserver(this);
 			Random randrow = new Random();
 			int randrowint = randrow.nextInt(8);
 			double randrowDouble = (double)randrowint;
@@ -31,6 +44,8 @@ public class Mobil extends Cell implements Runnable {
 				BasisStation basisst = (BasisStation) bas;
 				if (basisst.name.equals(nearBasisName)) {
 					this.basis = basisst;
+					this.basis.nameRadio.addObserver(this);
+					this.basis.refresh(this.basis.name);
 					break;
 				}
 			}

@@ -5,18 +5,22 @@ import java.util.Observable;
 public class BasisStation extends Cell {
 	
 	class NameRadio extends Observable {
+		
+		BasisStation owner;
+
 		NameRadio(BasisStation owner) {
 			this.owner = owner;
 		}
-		BasisStation owner;
 		public BasisStation getOwner() {
 			return this.owner;
 		}
+		
 		void setChangedPublic() {
 			super.setChanged();
 		}
-		public void notifyObservers(String changedName) {
-			super.notifyObservers(changedName);
+		
+		public void notifyObservers(String name) {
+			super.notifyObservers(name);
 		}
 	}
 	
@@ -25,11 +29,9 @@ public class BasisStation extends Cell {
 	
 	public String getName() {
 		return name;
-		
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void refresh(String name) {
 		this.nameRadio.setChangedPublic();
 		this.nameRadio.notifyObservers(name);
 	}

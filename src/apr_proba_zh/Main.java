@@ -31,38 +31,38 @@ public class Main {
 //		basises.cellList.add(b4);
 		basisesSet(b1, b2, b3, b4);
 		
-		Observer observer1 = new Observer() {
-			@Override
-			public void update(Observable o, Object arg) {
-				if (o instanceof BasisStation.NameRadio && arg instanceof String) {
-					NameRadio radio = (NameRadio)o;
-					BasisStation station = radio.owner;
-					String name = (String)arg;
-					System.out.println("Observer1 \n" + station.toString() + " sais: name changed to: " + name); 
-				}
-				
-			}
-		};
-		Observer observer2 = new Observer() {
-			@Override
-			public void update(Observable o, Object arg) {
-				if (o instanceof BasisStation.NameRadio && arg instanceof String) {
-					NameRadio radio = (NameRadio)o;
-					BasisStation station = radio.owner;
-					String name = (String)arg;
-					System.out.println("Observer2 \n" + station.toString() + " sais: name changed to: " + name); 
-				}
-				
-			}
-		};
-		b1.nameRadio.addObserver(observer1);
-		b1.nameRadio.addObserver(observer2);
-		b1.setName("cica");
-		
-		b1.nameRadio.deleteObserver(observer1);
-		b1.nameRadio.deleteObserver(observer2);
-		b1.setName("cica");
-		
+//		Observer observer1 = new Observer() {
+//			@Override
+//			public void update(Observable o, Object arg) {
+//				if (o instanceof BasisStation.NameRadio && arg instanceof String) {
+//					NameRadio radio = (NameRadio)o;
+//					BasisStation station = radio.owner;
+//					String name = (String)arg;
+//					System.out.println("Observer1 \n" + station.toString() + " sais: name changed to: " + name); 
+//				}
+//				
+//			}
+//		};
+//		Observer observer2 = new Observer() {
+//			@Override
+//			public void update(Observable o, Object arg) {
+//				if (o instanceof BasisStation.NameRadio && arg instanceof String) {
+//					NameRadio radio = (NameRadio)o;
+//					BasisStation station = radio.owner;
+//					String name = (String)arg;
+//					System.out.println("Observer2 \n" + station.toString() + " sais: name changed to: " + name); 
+//				}
+//				
+//			}
+//		};
+//		b1.nameRadio.addObserver(observer1);
+//		b1.nameRadio.addObserver(observer2);
+//		b1.setName("cica");
+//		
+//		b1.nameRadio.deleteObserver(observer1);
+//		b1.nameRadio.deleteObserver(observer2);
+//		b1.setName("cica");
+//		
 		
 		for (int i = 0; i<8; i++) {
 			for (int j = 0; j<8; j++) {
@@ -85,6 +85,8 @@ public class Main {
 		
 		for (int i= 0; i<10; i++) {
 			Mobil mobilx = new Mobil(0.0, 0.0, i);
+			mobilx.basis = b1;
+			b1.nameRadio.addObserver(mobilx);
 			Thread threadx = new Thread(mobilx);
 			threadx.start();	
 		}
