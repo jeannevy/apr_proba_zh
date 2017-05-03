@@ -20,7 +20,7 @@ public class Cell {
 		return col;
 	}
 	
-	public void setCell(double row, double col) {
+	public synchronized void setCell(double row, double col) {
 		this.rowPos = row;
 		this.colPos = col;
 	}
