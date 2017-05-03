@@ -1,5 +1,6 @@
 package apr_proba_zh;
 
+import java.time.LocalDateTime;
 import java.util.Observable;
 
 public class BasisStation extends Cell {
@@ -19,8 +20,8 @@ public class BasisStation extends Cell {
 			super.setChanged();
 		}
 		
-		public void notifyObservers(String name) {
-			super.notifyObservers(name);
+		public void notifyObservers() {
+			super.notifyObservers(this.owner.name);
 		}
 	}
 	
@@ -31,9 +32,13 @@ public class BasisStation extends Cell {
 		return name;
 	}
 
-	public void refresh(String name) {
+	public void refresh() {
 		this.nameRadio.setChangedPublic();
-		this.nameRadio.notifyObservers(name);
+		this.nameRadio.notifyObservers();
+	}
+	
+	public void getDate() {
+		System.out.println(LocalDateTime.now());
 	}
 
 	

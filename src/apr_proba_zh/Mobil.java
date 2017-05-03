@@ -45,11 +45,19 @@ public class Mobil extends Cell implements Runnable, Observer {
 				if (basisst.name.equals(nearBasisName)) {
 					this.basis = basisst;
 					this.basis.nameRadio.addObserver(this);
-					this.basis.refresh(this.basis.name);
+//					this.basis.refresh(this.basis.name);
 					break;
 				}
 			}
 			System.out.println(this);
+
+			Random daterand = new Random();
+			int dateRandInt = daterand.nextInt(5);
+			if (dateRandInt == 2) {
+				System.out.println("this mobil wants to know the time: " + this.id);
+				this.basis.getDate();
+			}
+			
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {

@@ -88,7 +88,19 @@ public class Main {
 			mobilx.basis = b1;
 			b1.nameRadio.addObserver(mobilx);
 			Thread threadx = new Thread(mobilx);
-			threadx.start();	
+			threadx.start();
+		}
+		
+		while (true) {
+			for (Cell cellX: Main.basises.cellList) {
+				BasisStation basisstationx = (BasisStation)cellX;
+				basisstationx.refresh();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
 	}
